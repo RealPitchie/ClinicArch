@@ -10,6 +10,8 @@ public class DatabaseContext : DbContext, IDatabaseContext
     {
     }
     public DbSet<Patient> Patients { get; set; }
+    public DbSet<Man> MenStats { get; set; }
+    public DbSet<Woman> WomenStats { get; set; }
     
     public async Task<int> SaveChanges()
     {

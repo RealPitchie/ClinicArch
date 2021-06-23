@@ -45,7 +45,18 @@ namespace WebApi
                 // Advertise the API versions supported for the particular endpoint
                 config.ReportApiVersions = true;
             });
-            #endregion
+            #endregion 
+            services.AddCors(options =>
+            { 
+                options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            }); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,11 +68,11 @@ namespace WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
