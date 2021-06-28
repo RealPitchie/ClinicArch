@@ -10,8 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Controllers.v1
 {   
-    [ApiVersion("1.0")]
-    [EnableCors()]
+    [ApiVersion("1.0")] 
     [Route("[controller]/[action]")]
     public class PatientsController : BaseApiController
     {   
@@ -26,7 +25,7 @@ namespace WebApi.Controllers.v1
         ///<param name="patient"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create(Patient patient/*CreatePatientCommand command*/)
+        public async Task<IActionResult> Create( [FromBody]Patient patient/*CreatePatientCommand command*/)
         {
             patient.Id = Guid.NewGuid().ToString();
             await _context.AddAsync(patient);
