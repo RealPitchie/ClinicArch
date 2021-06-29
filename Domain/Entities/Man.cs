@@ -9,7 +9,7 @@ namespace Domain.Entities
         [Display(Name = "Предварительный диагноз")]  
         public string PreliminaryDiagnosis { get; set; }
         [Display(Name = "ТNM")]  
-        public string TNM { get; set; }
+        public TNM TNM { get; set; }
         [Display(Name = "Гистологическое исследование опухоли")]  
         public string HistologicalAnalysis { get; set; }
         [Display(Name = "Наследственные мутации")]  
@@ -26,7 +26,7 @@ namespace Domain.Entities
         [Display(Name = "Спермограмма")]  
         public string Spermogram { get; set; }
         [Display(Name = "Дата криоконсервации спермы")]  
-        public DateTime SemenCryoDate { get; set; }
+        public DateTime SemenCryoDate { get; set; } = DateTime.Now.Date;
         [Display(Name = "Порции криоконсервации")]  
         public string CryoPortions { get; set; }
         [Display(Name = "Программа")]  

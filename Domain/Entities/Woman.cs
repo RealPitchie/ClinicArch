@@ -6,11 +6,11 @@ namespace Domain.Entities
 {
     public class Woman 
     {   
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         [Display(Name = "Предварительный диагноз")]  
         public string PreliminaryDiagnosis { get; set; }
         [Display(Name = "ТNM")]  
-        public string TNM { get; set; }
+        public TNM TNM { get; set; }
         [Display(Name = "Гистологическое исследование опухоли")]  
         public string HistologicalAnalysis { get; set; }
         [Display(Name = "Наследственные мутации")]  
@@ -22,17 +22,19 @@ namespace Domain.Entities
         [Display(Name = "Менархе")]  
         public string Menarche { get; set; }
         [Display(Name = "Менструация (по/через/обильность/болезненность)")]  
-        public string Menstruation { get; set; }
+        public bool Menstruation { get; set; }
         [Display(Name = "Последняя менструация")]  
-        public DateTime LastMenstruation { get; set; }
+        public DateTime LastMenstruation { get; set; } =  DateTime.Now.Date;
         [Display(Name = "Беременностей")]  
         public int Pregnancies { get; set; }
         [Display(Name = "Роды")]  
         public int Births { get; set; }
         [Display(Name = "Аборты")]  
         public int Abortions { get; set; }
-        [Display(Name = "Самопроизвольные выкидыши/на сроке")]  
-        public string Miscarriages { get; set; }
+        [Display(Name = "Самопроизвольные выкидыши")]  
+        public bool Miscarriages { get; set; }
+        [Display(Name = "На сроке")] 
+        public int PregnancyDuration { get; set; }
         [Display(Name = "Гинекологические заболевания")]  
         public string GynecologicalDiseases { get; set; }
         [Display(Name = "Результаты ПЦР на ИППП")]  
@@ -56,7 +58,7 @@ namespace Domain.Entities
         [Display(Name = "Прогнозируемы ответ яичников на стимуляцию")]  
         public string PredictedResponse { get; set; }
         [Display(Name = "Дата начала стимуляции")]  
-        public DateTime StimulationStart { get; set; }
+        public DateTime StimulationStart { get; set; } =  DateTime.Now.Date;
         [Display(Name = "День менструального цикла")]  
         public int DayOfCycle { get; set; }
         [Display(Name = "Программа")]  
@@ -70,7 +72,7 @@ namespace Domain.Entities
         [Display(Name = "Триггер овуляции")]  
         public string OvulationTrigger { get; set; }
         [Display(Name = "День ТВП")]  
-        public DateTime TVPDay { get; set; }
+        public DateTime TVPDay { get; set; } =  DateTime.Now.Date;
         [Display(Name = "Получено ооцитов (количество)")]  
         public double OocytesReceived { get; set; }
         [Display(Name = "Получено ооцитов (зрелость)")]  
@@ -100,7 +102,7 @@ namespace Domain.Entities
         [Display(Name = "Толщина эндометрия на день подсадки")]
         public double EndometrialThicknessImplantationDay { get; set; }
         [Display(Name = "Дата (день) подсадки")]
-        public DateTime ImplantationDay { get; set; }
+        public DateTime ImplantationDay { get; set; } =  DateTime.Now.Date;
         [Display(Name = "Качество эмбриона")]
         public string EmbryoQuality { get; set; }
         [Display(Name = "Количество эмбриона")]
@@ -112,7 +114,7 @@ namespace Domain.Entities
         [Display(Name = "Клиническая беременность")]
         public string ClinicalPregnancy { get; set; }
         [Display(Name = "Отрицательный результат")]
-        public string NegativeResult { get; set; }
+        public bool NegativeResult { get; set; }
         [Display(Name = "Исход")]
         public string Result { get; set; }
         [Display(Name = "Акушерские осложнения")]

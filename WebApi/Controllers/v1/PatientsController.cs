@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Features.PatientFeatures.Commands;
 using Application.Features.PatientFeatures.Queries;
+using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ namespace WebApi.Controllers.v1
     public class PatientsController : BaseApiController
     {   
         private readonly DatabaseContext _context;
+        private readonly IDictionaryService<TNM> _tnmService;
         public PatientsController(DatabaseContext context)
         {
             _context = context;
@@ -86,6 +89,13 @@ namespace WebApi.Controllers.v1
                 return BadRequest();
             }
             return Ok(await Mediator.Send(command));
+        }
+        [HttpGet]
+        public async Task<IEnumerable<TNM>> GetTNMs()
+        {
+            var tnms = await _tnmService.Get();
+
+            return tnms;
         }
     }
 }
