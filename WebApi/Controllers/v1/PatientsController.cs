@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Features.PatientFeatures.Commands;
 using Application.Features.PatientFeatures.Queries;
 using Application.Interfaces;
+using BlazorPatients.Data.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,12 @@ namespace WebApi.Controllers.v1
     public class PatientsController : BaseApiController
     {   
         private readonly DatabaseContext _context;
+        PatientService _patientService;
         private readonly IDictionaryService<TNM> _tnmService;
-        public PatientsController(DatabaseContext context)
+        public PatientsController(DatabaseContext context, PatientService patientService)
         {
             _context = context;
+            _patientService = patientService;
         }
         /// <summary>
         /// Creates a New Patient.
@@ -35,6 +38,13 @@ namespace WebApi.Controllers.v1
             await _context.SaveChangesAsync();
             return Ok(patient);
             //return Ok(await Mediator.Send(command));
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreatePatient([FromBody]Patient patient)
+        {
+            await _patientService.CreatePatient(patient);
+            
+            return Ok(patient); 
         }
         /// <summary>
         /// Gets all Patients.

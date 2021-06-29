@@ -7,6 +7,10 @@ namespace Domain.Entities
     public class Woman 
     {   
         public string Id { get; set; }
+        [Display(Name = "Основной диагноз")]  
+        public string PrimaryDiagnosis { get; set; }
+        [Display(Name = "Первично-множественное злокачественное образование")]  
+        public bool BadFormation { get; set; }
         [Display(Name = "Предварительный диагноз")]  
         public string PreliminaryDiagnosis { get; set; }
         [Display(Name = "ТNM")]  

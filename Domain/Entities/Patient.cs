@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -13,6 +14,12 @@ namespace Domain.Entities
         public string SurName { get; set; }
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; } = DateTime.Now.Date;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int HealthCardNo { get; set; }
+        public string PassportSer { get; set; }
+        public string PassportNo { get; set; }
+        public string PolisType { get; set; }
+        public string PolisNo { get; set; }
         public double Age { get;  set; }
         public string Gender { get; set; }
         public double Weight { get; set; }

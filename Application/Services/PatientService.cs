@@ -16,9 +16,28 @@ namespace BlazorPatients.Data.Services
         {
             _storageContext = storageContext; 
         }
-        public async Task<Patient> Add(Patient patient)
+        public async Task<Patient> CreatePatient(Patient patient)
         {
             patient.Id = Guid.NewGuid().ToString();
+
+            await _storageContext.AddAsync(patient).ConfigureAwait(false);
+
+            return patient;
+        }
+        public async Task<Man> AddMenStats(Man menStats)
+        {
+            var patient = await _storageContext.Patients.FirstAsync(p => p.Id == menStats.PatientId).ConfigureAwait(false);
+            patient.MenStats = menStats;
+            _storageContext.Update(patient);
+            await _storageContext.MenStats.AddAsync(menStats).ConfigureAwait(false);
+            await _storageContext.SaveChangesAsync().ConfigureAwait(false);
+
+            return menStats;
+
+        }
+        public async Task<Patient> Add(Patient patient)
+        {
+            
             patient.MenStats.Id = Guid.NewGuid().ToString();
             patient.WomenStats.Id = Guid.NewGuid().ToString();
             patient.MenStats.PatientId = patient.MenStats == null? null : patient.Id;
